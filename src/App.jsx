@@ -10,21 +10,15 @@ import Footer from './components/Footer';
 import CursorLight from './components/CursorLight';
 import ParticleBackground from './components/ParticleBackground';
 import PageLoader from './components/PageLoader';
-import { ThemeProvider } from './context/ThemeContext';
-import Lenis from 'lenis';
 
 function App() {
-  useEffect(() => {
-    // Scroll animations removed as requested
-  }, []);
-
   return (
-    <ThemeProvider>
+    <>
       <PageLoader />
       <CursorLight />
 
-      <div className="relative min-h-screen overflow-x-hidden transition-colors duration-500"
-        style={{ color: 'var(--text-primary)' }}>
+      <div className="relative min-h-screen overflow-x-hidden"
+        style={{ color: 'var(--text-primary)', background: 'var(--bg)' }}>
 
         {/* Particle canvas layer */}
         <ParticleBackground />
@@ -48,7 +42,7 @@ function App() {
         </main>
         <Footer />
       </div>
-    </ThemeProvider>
+    </>
   );
 }
 

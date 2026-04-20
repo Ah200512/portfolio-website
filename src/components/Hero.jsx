@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { TypeAnimation } from 'react-type-animation';
 import { ArrowRight, Mail, Download } from 'lucide-react';
 
 const Github = ({ size = 24 }) => (
@@ -17,6 +16,7 @@ const Linkedin = ({ size = 24 }) => (
     <circle cx="4" cy="4" r="2"></circle>
   </svg>
 );
+
 import { useClickSound } from '../hooks/useSounds';
 import TiltCard from './TiltCard';
 
@@ -57,11 +57,10 @@ export default function Hero() {
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
           {/* ── Left Column ── */}
-          <div>
-            {/* Badge */}
+          <div className="text-left">
             <motion.div
-              initial={{ opacity: 0, y: -20 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border backdrop-blur-md mb-8"
               style={{
@@ -70,72 +69,38 @@ export default function Hero() {
               }}
             >
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-sm font-medium" style={{ color: 'var(--text-secondary)' }}>
-                Available for Opportunities
+              <span className="text-xs font-bold tracking-widest uppercase italic" style={{ color: 'var(--primary-light)' }}>
+                Gen AI & Full-Stack Developer
               </span>
             </motion.div>
 
-            {/* Main heading */}
             <motion.h1
-              initial={{ opacity: 0, x: -40 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-              className="text-5xl md:text-7xl font-black tracking-tight leading-[1.05] mb-6"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-6xl md:text-8xl font-black leading-[1.1] mb-8"
               style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--text-primary)' }}
             >
-              Hi, I'm{' '}
-              <span
-                className="block"
-                style={{
-                  background: 'linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
-                }}
-              >
-                Adithya Harish
-              </span>
+              Building <span style={{ color: 'var(--primary)' }}>Intelligent</span> Systems.
             </motion.h1>
 
-            {/* Typing effect */}
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-xl md:text-2xl font-semibold mb-6 h-10"
-              style={{ color: 'var(--primary-light)' }}
-            >
-              <TypeAnimation
-                sequence={[
-                  'Full Stack Developer', 2200,
-                  'Gen AI Developer', 2200,
-                  'LLM Specialist', 2000,
-                  'Problem Solver', 2000,
-                ]}
-                wrapper="span"
-                speed={50}
-                repeat={Infinity}
-              />
-            </motion.div>
-
-            {/* Description */}
             <motion.p
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="text-lg mb-10 max-w-lg leading-relaxed"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2 }}
+              className="text-lg md:text-xl leading-relaxed mb-10 max-w-lg"
               style={{ color: 'var(--text-secondary)' }}
             >
-              I craft sleek, high-performance interfaces powered by modern code and Generative AI —
-              blending product thinking with scalable engineering for real-world impact.
+              Crafting high-performance digital experiences with a focus on 
+              scalable architecture and seamless AI integration.
             </motion.p>
 
-            {/* CTAs */}
+            {/* Buttons */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
-              className="flex flex-wrap items-center gap-4 mb-12"
+              transition={{ duration: 0.6, delay: 0.3 }}
+              className="flex flex-wrap gap-5 mb-12"
             >
               <motion.a
                 href="#projects"
@@ -149,103 +114,81 @@ export default function Hero() {
                 }}
               >
                 View Projects
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
               </motion.a>
+
               <motion.a
                 href="#contact"
                 onClick={playClick}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="px-7 py-3.5 font-semibold rounded-full border transition-all backdrop-blur-md"
+                className="group flex items-center gap-2 px-7 py-3.5 rounded-full border transition-all"
                 style={{
-                  color: 'var(--text-primary)',
-                  borderColor: 'var(--border-hover)',
-                  background: 'var(--glass-bg)',
-                }}
-              >
-                Contact Me
-              </motion.a>
-              <motion.a
-                href="/resume_adithya_harish.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={playClick}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                className="flex items-center gap-2 px-5 py-3.5 font-medium rounded-full border transition-all"
-                style={{
-                  color: 'var(--text-secondary)',
+                  background: 'var(--surface)',
                   borderColor: 'var(--border)',
-                  background: 'var(--surface-2)',
+                  color: 'var(--text-primary)',
                 }}
               >
-                <Download size={16} />
-                Resume
+                Let's Talk
+                <Mail size={18} />
               </motion.a>
             </motion.div>
 
-            {/* Social links */}
+            {/* Socials */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex items-center gap-5"
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="flex items-center gap-6"
             >
               {[
-                { href: 'https://github.com/Ah200512', icon: <Github size={20} />, label: 'GitHub' },
-                { href: 'https://www.linkedin.com/in/adityaharish05/', icon: <Linkedin size={20} />, label: 'LinkedIn' },
-                { href: 'mailto:adithyaaudi2005@gmail.com', icon: <Mail size={20} />, label: 'Email' },
-              ].map(({ href, icon, label }) => (
-                <motion.a
-                  key={label}
-                  href={href}
-                  target={href.startsWith('http') ? '_blank' : undefined}
+                { href: 'https://github.com/Ah200512', icon: <Github /> },
+                { href: 'https://www.linkedin.com/in/adityaharish05/', icon: <Linkedin /> },
+              ].map((social, i) => (
+                <a
+                  key={i}
+                  href={social.href}
+                  target="_blank"
                   rel="noopener noreferrer"
                   onClick={playClick}
-                  whileHover={{ scale: 1.15, y: -3 }}
-                  className="w-11 h-11 rounded-full flex items-center justify-center border transition-all"
-                  style={{
-                    color: 'var(--text-secondary)',
-                    borderColor: 'var(--border)',
-                    background: 'var(--surface-2)',
-                  }}
-                  title={label}
+                  className="transition-all hover:scale-110"
+                  style={{ color: 'var(--text-muted)' }}
                 >
-                  {icon}
-                </motion.a>
+                  {social.icon}
+                </a>
               ))}
-              <span className="text-sm ml-2" style={{ color: 'var(--text-muted)' }}>
-                Let's connect 👋
-              </span>
+              <div className="h-px w-12 bg-white/10" />
+              <button
+                className="text-xs font-bold tracking-[0.2em] uppercase transition-colors hover:text-white"
+                style={{ color: 'var(--text-muted)' }}
+              >
+                Scroll to explore
+              </button>
             </motion.div>
           </div>
 
-          {/* ── Right Column: Identity card ── */}
+          {/* ── Right Column ── */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.85 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.9, delay: 0.3, ease: 'easeOut' }}
-            className="relative lg:h-[580px] flex items-center justify-center"
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="relative hidden lg:block"
           >
-            {/* Ambient glow */}
-            <div
-              className="absolute inset-0 rounded-full blur-3xl opacity-30 animate-float-slow"
-              style={{ background: 'radial-gradient(circle, var(--primary) 0%, transparent 70%)' }}
-            />
-
+            {/* Bento-style identity card */}
             <TiltCard
-              gradientBorder
-              intensity={12}
-              glowColor="rgba(139,92,246,0.3)"
-              className="relative w-full max-w-sm rounded-2xl p-8"
+              className="p-8 rounded-[2rem] border-2 shadow-2xl overflow-hidden relative"
               style={{
-                background: 'var(--glass-bg)',
-                backdropFilter: 'blur(20px)',
+                background: 'rgba(15, 15, 15, 0.9)',
+                borderColor: 'var(--border)',
+                maxWidth: '430px',
+                marginLeft: 'auto',
               }}
             >
-              {/* Corner decoration */}
-              <div
-                className="absolute top-0 right-0 w-32 h-32 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none"
+              {/* Background accent orbs */}
+              <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full blur-[80px] pointer-events-none opacity-40"
+                style={{ background: 'var(--primary)' }}
+              />
+              <div className="absolute -bottom-20 -left-20 w-40 h-40 rounded-full blur-[80px] pointer-events-none opacity-20"
                 style={{ background: 'rgba(139,92,246,0.3)' }}
               />
 
@@ -268,56 +211,26 @@ export default function Hero() {
                 </div>
               </div>
 
-              {/* Stat cards */}
-              <div className="space-y-3">
+              {/* Quick stats / Chips */}
+              <div className="space-y-4">
                 {[
-                  {
-                    icon: '⚛️',
-                    color: '#60a5fa',
-                    bg: 'rgba(96,165,250,0.1)',
-                    title: 'Frontend Craft',
-                    sub: 'React · Tailwind · Framer Motion',
-                  },
-                  {
-                    icon: '🤖',
-                    color: '#a78bfa',
-                    bg: 'rgba(167,139,250,0.1)',
-                    title: 'Gen AI Engineering',
-                    sub: 'LLMs · RAG · LangChain · Groq',
-                  },
-                  {
-                    icon: '🚀',
-                    color: '#34d399',
-                    bg: 'rgba(52,211,153,0.1)',
-                    title: 'Full-Stack Scope',
-                    sub: 'Python · SQL · WebSockets',
-                  },
+                  { label: 'Frontend Craft', desc: 'React · Tailwind · Framer Motion', icon: '⚛️' },
+                  { label: 'Gen AI Engineering', desc: 'LLMs · RAG · LangChain · Groq', icon: '🤖' },
+                  { label: 'Full-Stack Scope', desc: 'Python · SQL · WebSockets', icon: '🚀' },
                 ].map((item, i) => (
-                  <motion.div
+                  <div
                     key={i}
-                    initial={{ opacity: 0, x: 20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.6 + i * 0.15 }}
-                    whileHover={{ x: 4, scale: 1.01 }}
-                    className="p-3.5 rounded-xl flex items-center gap-4 cursor-pointer"
-                    style={{
-                      background: 'var(--surface-2)',
-                      border: '1px solid var(--border)',
-                    }}
+                    className="p-4 rounded-2xl flex items-center gap-4 border transition-all hover:bg-white/5"
+                    style={{ background: 'rgba(255,255,255,0.03)', borderColor: 'var(--border)' }}
                   >
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center text-lg shrink-0"
-                      style={{ background: item.bg }}
-                    >
+                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-lg shadow-inner">
                       {item.icon}
                     </div>
                     <div>
-                      <p className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
-                        {item.title}
-                      </p>
-                      <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{item.sub}</p>
+                      <h4 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{item.label}</h4>
+                      <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{item.desc}</p>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
 
@@ -331,27 +244,6 @@ export default function Hero() {
             </TiltCard>
           </motion.div>
         </div>
-
-        {/* Scroll hint */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2"
-        >
-          <span className="text-xs tracking-widest uppercase" style={{ color: 'var(--text-muted)' }}>Scroll</span>
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-5 h-8 rounded-full border-2 flex items-start justify-center pt-1.5"
-            style={{ borderColor: 'var(--border-hover)' }}
-          >
-            <div
-              className="w-1.5 h-1.5 rounded-full"
-              style={{ background: 'var(--primary)' }}
-            />
-          </motion.div>
-        </motion.div>
       </div>
     </section>
   );

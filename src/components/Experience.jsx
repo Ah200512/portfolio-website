@@ -8,7 +8,7 @@ const experiences = [
     label: 'Internship',
     title: 'Software Developer Intern',
     org: 'AES Technologies',
-    color: '#8b5cf6',
+    color: '#d4af37',
     points: [
       'Built comprehensive front-end components using HTML, CSS, JavaScript, and React.js.',
       'Focused on responsive, user-friendly, and accessible interface design.',
@@ -21,7 +21,7 @@ const experiences = [
     label: 'Volunteering',
     title: 'Educational Support',
     org: 'The Sevashram Trust',
-    color: '#34d399',
+    color: '#d4af37',
     points: [
       'Helped children with their studies and educational development.',
       'Fostered growth and learning within an underprivileged community.',
@@ -34,13 +34,13 @@ const achievements = [
     icon: '🎓',
     title: 'B.Tech Computer Science',
     desc: 'SRM University — Specialization in AI & Data Science.',
-    color: '#60a5fa',
+    color: '#d4af37',
   },
   {
     icon: '⚡',
     title: 'Gen AI Certification',
     desc: 'Completed advanced certification in Generative AI and LLM Engineering.',
-    color: '#a78bfa',
+    color: '#d4af37',
   },
 ];
 

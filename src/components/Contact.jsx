@@ -43,9 +43,9 @@ export default function Contact() {
   };
 
   const socials = [
-    { href: 'https://www.linkedin.com/in/adityaharish05/', icon: <Linkedin size={22} />, label: 'LinkedIn',  color: '#60a5fa' },
-    { href: 'https://github.com/Ah200512',                 icon: <Github size={22} />,   label: 'GitHub',    color: '#a78bfa' },
-    { href: 'https://www.instagram.com/adithya_harish05/', icon: <Instagram size={22} />, label: 'Instagram', color: '#f472b6' },
+    { href: 'https://www.linkedin.com/in/adityaharish05/', icon: <Linkedin size={22} />, label: 'LinkedIn',  color: '#d4af37' },
+    { href: 'https://github.com/Ah200512',                 icon: <Github size={22} />,   label: 'GitHub',    color: '#d4af37' },
+    { href: 'https://www.instagram.com/adithya_harish05/', icon: <Instagram size={22} />, label: 'Instagram', color: '#d4af37' },
   ];
 
   return (
@@ -92,7 +92,7 @@ export default function Contact() {
           <TiltCard
             gradientBorder
             intensity={5}
-            glowColor="rgba(139,92,246,0.15)"
+            glowColor="rgba(212, 175, 55, 0.25)"
             className="rounded-3xl overflow-hidden relative"
             style={{ background: 'var(--surface)' }}
           >

@@ -3,47 +3,47 @@ import { motion } from 'framer-motion';
 
 const skillCategories = [
   {
-    title: 'Programming',
+    title: 'Programming & DSA',
     emoji: '💻',
-    color: '#60a5fa',
+    color: '#d4af37',
     skills: [
-      { name: 'Python',      level: 90 },
-      { name: 'Java',        level: 75 },
-      { name: 'JavaScript',  level: 88 },
-      { name: 'SQL',         level: 82 },
+      { name: 'DSA',             level: 85 },
+      { name: 'Python',          level: 90 },
+      { name: 'C / C++',         level: 80 },
+      { name: 'Java / JS',       level: 85 },
     ],
   },
   {
-    title: 'Web / Frontend',
+    title: 'Development',
     emoji: '🎨',
-    color: '#a78bfa',
+    color: '#d4af37',
     skills: [
-      { name: 'React.js',      level: 85 },
-      { name: 'Tailwind CSS',  level: 90 },
-      { name: 'Framer Motion', level: 82 },
-      { name: 'HTML/CSS',      level: 92 },
+      { name: 'React.js',      level: 88 },
+      { name: 'Tailwind CSS',  level: 92 },
+      { name: 'Frontend Eng',  level: 90 },
+      { name: 'WebSockets',    level: 78 },
     ],
   },
   {
-    title: 'AI / ML',
+    title: 'AI & Machine Learning',
     emoji: '🤖',
-    color: '#34d399',
+    color: '#d4af37',
     skills: [
-      { name: 'LLM Integration', level: 88 },
-      { name: 'LangChain',       level: 78 },
-      { name: 'Groq API',        level: 85 },
-      { name: 'RAG Systems',     level: 80 },
+      { name: 'Generative AI', level: 92 },
+      { name: 'LLM Pipelines', level: 88 },
+      { name: 'ML Foundations',level: 75 },
+      { name: 'LangChain',     level: 85 },
     ],
   },
   {
-    title: 'Tools',
+    title: 'Tools & Systems',
     emoji: '⚙️',
-    color: '#fb923c',
+    color: '#d4af37',
     skills: [
-      { name: 'Git / GitHub',    level: 88 },
-      { name: 'System Design',   level: 75 },
-      { name: 'WebSockets',      level: 78 },
-      { name: 'UI/UX Prototype', level: 80 },
+      { name: 'Git / GitHub',    level: 90 },
+      { name: 'System Design',   level: 78 },
+      { name: 'RAG Architecture',level: 82 },
+      { name: 'Deployment',      level: 75 },
     ],
   },
 ];
@@ -149,7 +149,7 @@ export default function Skills() {
           transition={{ duration: 0.7, delay: 0.3 }}
           className="mt-16 flex flex-wrap justify-center gap-3"
         >
-          {['React', 'Python', 'Java', 'SQL', 'Groq', 'LangChain', 'Tailwind', 'Framer', 'WebSockets', 'Git', 'RAG', 'LLMs', 'HTML/CSS', 'System Design'].map((tag, i) => (
+          {['DSA', 'Python', 'C', 'C++', 'Java', 'JavaScript', 'ML', 'AI', 'React', 'Git', 'SQL', 'LLMs', 'LangChain', 'RAG'].map((tag, i) => (
             <motion.span
               key={tag}
               whileHover={{ scale: 1.1, y: -2 }}

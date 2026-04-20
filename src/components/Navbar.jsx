@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Sun, Moon } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useTheme } from '../context/ThemeContext';
 import { useClickSound } from '../hooks/useSounds';
 
 const navLinks = [
@@ -17,10 +16,8 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled]         = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection]   = useState('home');
-  const { isDark, setIsDark }               = useTheme();
   const playClick = useClickSound();
 
-  // Scroll listener → glass + active section
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -36,11 +33,6 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  const handleThemeToggle = () => {
-    playClick();
-    setIsDark(prev => !prev);
-  };
 
   return (
     <nav
@@ -58,7 +50,7 @@ export default function Navbar() {
         {/* Logo */}
         <motion.a
           href="#home"
-          className="text-xl font-black tracking-tight flex items-center gap-2"
+          className="text-xl font-black tracking-tight flex items-center gap-2 group"
           style={{ color: 'var(--text-primary)' }}
           whileHover={{ scale: 1.03 }}
           onClick={playClick}
@@ -103,32 +95,6 @@ export default function Navbar() {
             );
           })}
 
-          {/* Theme Toggle */}
-          <motion.button
-            onClick={handleThemeToggle}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            className="w-9 h-9 rounded-full flex items-center justify-center border transition-all"
-            style={{
-              background: 'var(--surface-2)',
-              borderColor: 'var(--border)',
-              color: 'var(--text-secondary)',
-            }}
-            title="Toggle theme"
-          >
-            <AnimatePresence mode="wait">
-              {isDark ? (
-                <motion.span key="sun" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                  <Sun size={16} />
-                </motion.span>
-              ) : (
-                <motion.span key="moon" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.2 }}>
-                  <Moon size={16} />
-                </motion.span>
-              )}
-            </AnimatePresence>
-          </motion.button>
-
           <motion.a
             href="/resume_adithya_harish.pdf"
             target="_blank"
@@ -136,20 +102,18 @@ export default function Navbar() {
             onClick={playClick}
             whileHover={{ scale: 1.05, y: -1 }}
             whileTap={{ scale: 0.97 }}
-            className="px-5 py-2 text-sm font-bold text-white rounded-full transition-all animate-pulse-glow"
+            className="px-5 py-2 text-sm font-bold text-white rounded-full transition-all"
             style={{
               background: 'var(--primary)',
+              boxShadow: '0 10px 30px rgba(212, 175, 55, 0.3)',
             }}
           >
             Resume
           </motion.a>
         </div>
 
-        {/* Mobile: theme + hamburger */}
+        {/* Mobile: hamburger only */}
         <div className="flex items-center gap-3 md:hidden">
-          <button onClick={handleThemeToggle} className="text-gray-400 hover:text-white">
-            {isDark ? <Sun size={18} /> : <Moon size={18} />}
-          </button>
           <button
             className="transition-colors"
             style={{ color: 'var(--text-secondary)' }}
