@@ -102,10 +102,11 @@ export default function Navbar() {
             onClick={playClick}
             whileHover={{ scale: 1.05, y: -1 }}
             whileTap={{ scale: 0.97 }}
-            className="px-5 py-2 text-sm font-bold text-white rounded-full transition-all"
+            className="px-5 py-2 text-sm font-bold rounded-full transition-all"
             style={{
-              background: 'var(--primary)',
-              boxShadow: '0 10px 30px rgba(212, 175, 55, 0.3)',
+              background: '#ffffff',
+              color: '#000000',
+              boxShadow: '0 10px 30px rgba(255, 255, 255, 0.2)',
             }}
           >
             Resume
@@ -151,8 +152,8 @@ export default function Navbar() {
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => { setIsMobileMenuOpen(false); playClick(); }}
-                className="inline-block mt-2 px-6 py-3 text-center font-bold text-white rounded-xl"
-                style={{ background: 'var(--primary)' }}
+                className="inline-block mt-2 px-6 py-3 text-center font-bold rounded-xl"
+                style={{ background: 'var(--primary)', color: 'var(--bg)' }}
               >
                 Resume
               </a>

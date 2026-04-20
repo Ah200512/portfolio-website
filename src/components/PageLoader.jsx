@@ -38,9 +38,10 @@ export default function PageLoader() {
                 transition={{ duration: 0.5 }}
                 className="relative z-10 w-12 h-12 rounded-xl flex items-center justify-center font-black text-2xl"
                 style={{
+                  borderTop: '2px solid #ffd700',
                   background: 'linear-gradient(135deg, #b8860b, #ffd700)',
                   color: '#000',
-                  boxShadow: '0 0 20px rgba(212, 175, 55, 0.4)',
+                  boxShadow: '0 0 20px rgba(192, 192, 192, 0.4)',
                   fontFamily: 'Space Grotesk, sans-serif'
                 }}
               >

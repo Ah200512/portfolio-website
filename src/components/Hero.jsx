@@ -107,10 +107,11 @@ export default function Hero() {
                 onClick={playClick}
                 whileHover={{ scale: 1.05, y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="group flex items-center gap-2 px-7 py-3.5 text-white font-bold rounded-full transition-all"
+                className="group flex items-center gap-2 px-7 py-3.5 font-bold rounded-full transition-all"
                 style={{
-                  background: 'var(--primary)',
-                  boxShadow: '0 10px 40px rgba(212, 175, 55, 0.5)',
+                  background: '#ffffff',
+                  color: '#000000',
+                  boxShadow: '0 10px 40px rgba(255, 255, 255, 0.2)',
                 }}
               >
                 View Projects

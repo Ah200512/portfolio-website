@@ -18,7 +18,7 @@ const projects = [
       'A real-time communication and accessibility platform integrating video/audio streaming with AI features: speech transcription, object detection (computer vision), and AI-generated feedback loops.',
     tech: ['React', 'Tailwind CSS', 'Framer Motion', 'WebSockets', 'Groq API', 'Clerk', 'OpenCV'],
     category: 'AI',
-    featured: true,
+    featured: false,
     status: '🏆 Flagship',
     emoji: '👁️',
     color: '#d4af37',
@@ -153,13 +153,12 @@ export default function Projects() {
                 transition={{ duration: 0.4, delay: idx * 0.07 }}
               >
                 <TiltCard
-                  gradientBorder={project.featured}
                   intensity={8}
                   glowColor={`${project.color}30`}
                   className="h-full rounded-2xl card-shine overflow-hidden flex flex-col"
                   style={{
                     background: 'var(--surface)',
-                    border: project.featured ? undefined : '1px solid var(--border)',
+                    border: '1px solid var(--border)',
                   }}
                   onMouseEnter={() => setHovered(project.title)}
                   onMouseLeave={() => setHovered(null)}

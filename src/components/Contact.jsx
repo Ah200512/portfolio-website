@@ -216,12 +216,13 @@ export default function Contact() {
                   type="submit"
                   whileHover={{ scale: 1.02, y: -1 }}
                   whileTap={{ scale: 0.98 }}
-                  className="w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-white text-base transition-all"
+                  className="w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-base transition-all"
                   style={{
                     background: submitted
-                      ? '#ffd700'
+                      ? '#00ff00'
                       : 'var(--primary)',
-                    boxShadow: '0 10px 30px rgba(212, 175, 55, 0.4)',
+                    color: 'var(--bg)',
+                    boxShadow: '0 10px 30px rgba(255, 255, 255, 0.2)',
                   }}
                 >
                   {submitted ? (
