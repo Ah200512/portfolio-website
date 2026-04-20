@@ -86,19 +86,31 @@ export default function Hero() {
             </motion.p>
 
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
               className="text-6xl md:text-8xl font-black leading-[1.1] mb-8"
               style={{
                 fontFamily: 'Space Grotesk, sans-serif',
-                background: 'linear-gradient(135deg, #ffd700 0%, #b8860b 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent',
-                backgroundClip: 'text',
+                color: '#ffffff',
               }}
             >
-              Building <span style={{ stroke: 'white', WebkitTextStroke: '0px' }}>Intelligent</span> Systems.
+              {['Building', 'Intelligent', 'Systems.'].map((word, i) => (
+                <span key={i} className="inline-block mr-4 whitespace-nowrap overflow-hidden">
+                  {word.split('').map((char, j) => (
+                    <motion.span
+                      key={j}
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.5,
+                        delay: (i * 0.2) + (j * 0.03),
+                        ease: [0.33, 1, 0.68, 1]
+                      }}
+                      className="inline-block"
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </span>
+              ))}
             </motion.h1>
 
             <motion.p
