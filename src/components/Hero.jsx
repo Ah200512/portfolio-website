@@ -149,7 +149,7 @@ export default function Hero() {
                 <Linkedin size={28} />
               </a>
               <div className="h-px w-12 bg-white/10" />
-              <span className="text-xs font-bold tracking-widest uppercase text-gray-500">Scroll to explore</span>
+              <div className="mouse-scroll" />
             </div>
           </div>
 

@@ -21,7 +21,7 @@ const projects = [
     featured: false,
     status: '🏆 Flagship',
     emoji: '👁️',
-    color: '#d4af37',
+    color: '#ffffff',
     links: { demo: '#', github: 'https://github.com/Ah200512' },
   },
   {
@@ -32,7 +32,7 @@ const projects = [
     category: 'AI',
     featured: false,
     emoji: '🗄️',
-    color: '#d4af37',
+    color: '#ffffff',
     links: { github: 'https://github.com/Ah200512' },
   },
   {
@@ -43,7 +43,7 @@ const projects = [
     category: 'AI',
     featured: false,
     emoji: '📄',
-    color: '#d4af37',
+    color: '#ffffff',
     links: { github: 'https://github.com/Ah200512' },
   },
   {
@@ -54,7 +54,7 @@ const projects = [
     category: 'AI',
     featured: false,
     emoji: '🔍',
-    color: '#d4af37',
+    color: '#ffffff',
     links: { github: 'https://github.com/Ah200512' },
   },
   {
@@ -65,7 +65,7 @@ const projects = [
     category: 'Web3',
     featured: false,
     emoji: '🗳️',
-    color: '#d4af37',
+    color: '#ffffff',
     links: { github: 'https://github.com/Ah200512' },
   },
   {
@@ -76,7 +76,7 @@ const projects = [
     category: 'Web3',
     featured: false,
     emoji: '🔊',
-    color: '#d4af37',
+    color: '#ffffff',
     links: { github: 'https://github.com/Ah200512' },
   },
 ];
