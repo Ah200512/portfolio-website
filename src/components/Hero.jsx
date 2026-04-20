@@ -74,6 +74,17 @@ export default function Hero() {
               </span>
             </motion.div>
 
+            <motion.p
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="text-xl md:text-2xl font-medium mb-4 flex items-center gap-3"
+              style={{ color: 'var(--text-secondary)' }}
+            >
+              <span className="w-8 h-[2px]" style={{ background: 'var(--primary)' }} />
+              Hi, I'm <span style={{ color: '#ffffff', fontWeight: 800 }}>Adithya Harish</span>
+            </motion.p>
+
             <motion.h1
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
