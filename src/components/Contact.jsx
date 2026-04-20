@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Send } from 'lucide-react';
+import { Mail, Phone, Send, CheckCircle } from 'lucide-react';
 
 const Github = ({ size = 24 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -24,100 +24,216 @@ const Instagram = ({ size = 24 }) => (
     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
   </svg>
 );
+import { useClickSound } from '../hooks/useSounds';
+import TiltCard from './TiltCard';
 
 export default function Contact() {
+  const playClick = useClickSound();
+  const [formState, setFormState] = useState({ name: '', email: '', message: '' });
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    playClick();
+    // Build mailto
+    const mailto = `mailto:adithyaaudi2005@gmail.com?subject=Portfolio Inquiry from ${encodeURIComponent(formState.name)}&body=${encodeURIComponent(formState.message)}%0A%0AFrom: ${encodeURIComponent(formState.email)}`;
+    window.open(mailto, '_blank');
+    setSubmitted(true);
+    setTimeout(() => setSubmitted(false), 3000);
+  };
+
+  const socials = [
+    { href: 'https://www.linkedin.com/in/adityaharish05/', icon: <Linkedin size={22} />, label: 'LinkedIn',  color: '#60a5fa' },
+    { href: 'https://github.com/Ah200512',                 icon: <Github size={22} />,   label: 'GitHub',    color: '#a78bfa' },
+    { href: 'https://www.instagram.com/adithya_harish05/', icon: <Instagram size={22} />, label: 'Instagram', color: '#f472b6' },
+  ];
+
   return (
-    <section id="contact" className="py-24 relative z-10">
-      <div className="max-w-4xl mx-auto px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+    <section id="contact" className="py-28 relative z-10">
+      <div className="max-w-5xl mx-auto px-6">
+
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Let's build something meaningful.</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full mb-6"></div>
-          <p className="text-gray-400 text-lg">
-            Whether it's a startup idea, an open-source collaboration, or a full-time opportunity, my inbox is always open.
+          <p className="text-sm font-semibold tracking-widest uppercase mb-3" style={{ color: 'var(--primary)' }}>
+            Get In Touch
+          </p>
+          <h2
+            className="text-4xl md:text-6xl font-black leading-tight mb-5"
+            style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--text-primary)' }}
+          >
+            Let's Build Something{' '}
+            <span
+              style={{
+                background: 'linear-gradient(135deg, #ffd700, #b8860b)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
+            >
+              Meaningful.
+            </span>
+          </h2>
+          <div className="section-line mx-auto mb-6" />
+          <p className="max-w-xl mx-auto text-lg" style={{ color: 'var(--text-secondary)' }}>
+            Whether it's a startup idea, open-source collaboration, or a full-time opportunity — my inbox is always open.
           </p>
         </motion.div>
 
-        <div className="glass p-8 md:p-12 rounded-3xl border border-white/10 shadow-2xl relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl translate-x-1/2 -translate-y-1/2"></div>
-          <div className="absolute bottom-0 left-0 w-64 h-64 bg-accent/10 rounded-full blur-3xl -translate-x-1/2 translate-y-1/2"></div>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+        >
+          <TiltCard
+            gradientBorder
+            intensity={5}
+            glowColor="rgba(139,92,246,0.15)"
+            className="rounded-3xl overflow-hidden relative"
+            style={{ background: 'var(--surface)' }}
+          >
+            {/* Corner orbs */}
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full blur-3xl opacity-20 translate-x-1/2 -translate-y-1/2 pointer-events-none"
+              style={{ background: 'var(--primary)' }} />
+            <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full blur-3xl opacity-15 -translate-x-1/2 translate-y-1/2 pointer-events-none"
+              style={{ background: 'var(--accent)' }} />
 
-          <div className="grid md:grid-cols-2 gap-12 relative z-10">
-            {/* Contact Info */}
-            <div className="space-y-8">
-              <h3 className="text-2xl font-semibold text-white mb-6">Reach Out</h3>
-              
-              <a href="mailto:adithyaaudi2005@gmail.com" className="flex items-center gap-4 group p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all cursor-pointer">
-                <div className="w-12 h-12 rounded-full bg-primary/20 text-primary flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Mail size={20} />
-                </div>
+            <div className="p-8 md:p-12 relative z-10 grid md:grid-cols-2 gap-12">
+
+              {/* Contact Info */}
+              <div className="space-y-8">
+                <h3 className="text-2xl font-bold" style={{ color: 'var(--text-primary)' }}>Reach Out</h3>
+
+                <a
+                  href="mailto:adithyaaudi2005@gmail.com"
+                  onClick={playClick}
+                  className="flex items-center gap-4 group p-4 rounded-2xl border transition-all"
+                  style={{
+                    background: 'var(--surface-2)',
+                    borderColor: 'var(--border)',
+                  }}
+                >
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center transition-transform group-hover:scale-110"
+                    style={{ background: 'rgba(139,92,246,0.15)', color: 'var(--primary)' }}
+                  >
+                    <Mail size={20} />
+                  </div>
+                  <div>
+                    <p className="text-xs mb-0.5" style={{ color: 'var(--text-muted)' }}>Email</p>
+                    <p className="font-semibold text-sm truncate" style={{ color: 'var(--text-primary)' }}>
+                      adithyaaudi2005@gmail.com
+                    </p>
+                  </div>
+                </a>
+
+                <a
+                  href="tel:+919791681451"
+                  onClick={playClick}
+                  className="flex items-center gap-4 group p-4 rounded-2xl border transition-all"
+                  style={{
+                    background: 'var(--surface-2)',
+                    borderColor: 'var(--border)',
+                  }}
+                >
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center transition-transform group-hover:scale-110"
+                    style={{ background: 'rgba(96,165,250,0.15)', color: 'var(--accent)' }}
+                  >
+                    <Phone size={20} />
+                  </div>
+                  <div>
+                    <p className="text-xs mb-0.5" style={{ color: 'var(--text-muted)' }}>Phone</p>
+                    <p className="font-semibold text-sm" style={{ color: 'var(--text-primary)' }}>+91 9791681451</p>
+                  </div>
+                </a>
+
+                {/* Social icons */}
                 <div>
-                  <p className="text-sm text-gray-500">Email</p>
-                  <p className="text-white font-bold tracking-wide truncate max-w-[200px] md:max-w-xs">adithyaaudi2005@gmail.com</p>
+                  <p className="text-sm mb-4 font-medium" style={{ color: 'var(--text-muted)' }}>Find me on</p>
+                  <div className="flex gap-3">
+                    {socials.map(({ href, icon, label, color }) => (
+                      <motion.a
+                        key={label}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        onClick={playClick}
+                        whileHover={{ scale: 1.12, y: -3 }}
+                        whileTap={{ scale: 0.95 }}
+                        className="w-14 h-14 rounded-2xl flex items-center justify-center border transition-all"
+                        style={{
+                          background: `${color}12`,
+                          borderColor: 'var(--border)',
+                          color,
+                        }}
+                        title={label}
+                      >
+                        {icon}
+                      </motion.a>
+                    ))}
+                  </div>
                 </div>
-              </a>
-
-              <a href="tel:+919791681451" className="flex items-center gap-4 group p-4 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 hover:bg-white/10 transition-all cursor-pointer">
-                <div className="w-12 h-12 rounded-full bg-accent/20 text-accent flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <Phone size={20} />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Phone</p>
-                  <p className="text-white font-bold tracking-wide">+91 9791681451</p>
-                </div>
-              </a>
-
-              <div className="flex items-center gap-4 pt-4">
-                <a href="https://www.linkedin.com/in/adityaharish05/" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary/50 hover:bg-primary/20 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all">
-                  <Linkedin size={24} />
-                </a>
-                <a href="https://github.com/Ah200512" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-primary/50 hover:bg-primary/20 hover:shadow-[0_0_15px_rgba(59,130,246,0.3)] transition-all">
-                  <Github size={24} />
-                </a>
-                <a href="https://www.instagram.com/adithya_harish05/" target="_blank" rel="noopener noreferrer" className="w-14 h-14 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:border-accent/50 hover:bg-accent/20 hover:shadow-[0_0_15px_rgba(192,132,252,0.3)] transition-all">
-                  <Instagram size={24} />
-                </a>
               </div>
+
+              {/* Contact Form */}
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <input
+                    type="text"
+                    required
+                    placeholder="Your Name"
+                    value={formState.name}
+                    onChange={e => setFormState(s => ({ ...s, name: e.target.value }))}
+                    className="form-input"
+                  />
+                </div>
+                <div>
+                  <input
+                    type="email"
+                    required
+                    placeholder="Your Email"
+                    value={formState.email}
+                    onChange={e => setFormState(s => ({ ...s, email: e.target.value }))}
+                    className="form-input"
+                  />
+                </div>
+                <div>
+                  <textarea
+                    rows={5}
+                    required
+                    placeholder="Your Message..."
+                    value={formState.message}
+                    onChange={e => setFormState(s => ({ ...s, message: e.target.value }))}
+                    className="form-input resize-none"
+                  />
+                </div>
+                <motion.button
+                  type="submit"
+                  whileHover={{ scale: 1.02, y: -1 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="w-full flex items-center justify-center gap-2 py-4 rounded-xl font-bold text-white text-base transition-all"
+                  style={{
+                    background: submitted
+                      ? '#ffd700'
+                      : 'var(--primary)',
+                    boxShadow: '0 10px 30px rgba(212, 175, 55, 0.4)',
+                  }}
+                >
+                  {submitted ? (
+                    <><CheckCircle size={18} /> Message Sent!</>
+                  ) : (
+                    <><Send size={18} /> Send Message</>
+                  )}
+                </motion.button>
+              </form>
             </div>
-
-            {/* Contact Form */}
-            <form className="space-y-4">
-              <div>
-                <input 
-                  type="text" 
-                  placeholder="Your Name" 
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all"
-                />
-              </div>
-              <div>
-                <input 
-                  type="email" 
-                  placeholder="Your Email" 
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all"
-                />
-              </div>
-              <div>
-                <textarea 
-                  rows="4" 
-                  placeholder="Your Message..." 
-                  className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder:text-gray-500 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/50 transition-all resize-none"
-                ></textarea>
-              </div>
-              <button 
-                type="button" 
-                className="w-full flex items-center justify-center gap-2 bg-white text-black font-bold text-lg py-4 rounded-xl hover:bg-gray-200 transition-colors group"
-              >
-                Send Message
-                <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-              </button>
-            </form>
-          </div>
-        </div>
+          </TiltCard>
+        </motion.div>
       </div>
     </section>
   );

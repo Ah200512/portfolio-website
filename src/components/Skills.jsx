@@ -1,70 +1,165 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 
 const skillCategories = [
   {
-    title: "Frontend Development",
-    skills: ["HTML", "CSS", "JavaScript", "React.js", "Tailwind CSS", "Framer Motion"]
+    title: 'Programming',
+    emoji: '💻',
+    color: '#60a5fa',
+    skills: [
+      { name: 'Python',      level: 90 },
+      { name: 'Java',        level: 75 },
+      { name: 'JavaScript',  level: 88 },
+      { name: 'SQL',         level: 82 },
+    ],
   },
   {
-    title: "Backend & Full-Stack",
-    skills: ["Python", "SQL", "WebSockets", "Node.js Conceptually", "Database Design"]
+    title: 'Web / Frontend',
+    emoji: '🎨',
+    color: '#a78bfa',
+    skills: [
+      { name: 'React.js',      level: 85 },
+      { name: 'Tailwind CSS',  level: 90 },
+      { name: 'Framer Motion', level: 82 },
+      { name: 'HTML/CSS',      level: 92 },
+    ],
   },
   {
-    title: "AI & Modern Tech",
-    skills: ["Generative AI", "LLM Integration", "Groq API", "RAG Concepts", "AI Prompting"]
+    title: 'AI / ML',
+    emoji: '🤖',
+    color: '#34d399',
+    skills: [
+      { name: 'LLM Integration', level: 88 },
+      { name: 'LangChain',       level: 78 },
+      { name: 'Groq API',        level: 85 },
+      { name: 'RAG Systems',     level: 80 },
+    ],
   },
   {
-    title: "Tools & Methodologies",
-    skills: ["Git", "SDLC", "Agile", "System Design", "UI/UX Prototyping"]
-  }
+    title: 'Tools',
+    emoji: '⚙️',
+    color: '#fb923c',
+    skills: [
+      { name: 'Git / GitHub',    level: 88 },
+      { name: 'System Design',   level: 75 },
+      { name: 'WebSockets',      level: 78 },
+      { name: 'UI/UX Prototype', level: 80 },
+    ],
+  },
 ];
 
-export default function Skills() {
+function AnimatedBar({ level, color }) {
   return (
-    <section id="skills" className="py-24 relative z-10 w-full overflow-hidden">
+    <div className="w-full h-1.5 rounded-full mt-1" style={{ background: 'var(--surface-2)' }}>
+      <motion.div
+        initial={{ width: 0 }}
+        animate={{ width: `${level}%` }}
+        transition={{ duration: 1.2, ease: 'easeOut', delay: 0.2 }}
+        className="h-full rounded-full"
+        style={{ background: `linear-gradient(90deg, ${color}, ${color}99)` }}
+      />
+    </div>
+  );
+}
+
+export default function Skills() {
+  const [activeCategory, setActiveCategory] = useState(null);
+
+  return (
+    <section id="skills" className="py-28 relative z-10 overflow-hidden">
       <div className="max-w-7xl mx-auto px-6">
-        <motion.div 
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
+
+        {/* Heading */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Core Arsenal</h2>
-          <div className="w-20 h-1 bg-gradient-to-r from-primary to-accent mx-auto rounded-full mb-6"></div>
-          <p className="text-gray-400 max-w-2xl mx-auto">
-            A comprehensive toolkit designed for building scalable, high-performance, and intelligent web applications.
+          <p className="text-sm font-semibold tracking-widest uppercase mb-3" style={{ color: 'var(--primary)' }}>
+            Technical Skills
+          </p>
+          <h2
+            className="text-4xl md:text-6xl font-black leading-tight mb-5"
+            style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--text-primary)' }}
+          >
+            Core Arsenal
+          </h2>
+          <div className="section-line mx-auto mb-6" />
+          <p className="max-w-2xl mx-auto" style={{ color: 'var(--text-secondary)' }}>
+            A comprehensive toolkit for building scalable, high-performance, intelligent applications.
           </p>
         </motion.div>
 
+        {/* Skill category cards */}
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {skillCategories.map((category, idx) => (
-            <motion.div 
+          {skillCategories.map((cat, idx) => (
+            <motion.div
               key={idx}
               initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="glass p-6 rounded-2xl border border-white/5 hover:border-white/20 transition-all group hover:-translate-y-1 block"
+              whileHover={{ y: -6 }}
+              onClick={() => setActiveCategory(activeCategory === idx ? null : idx)}
+              className="p-6 rounded-2xl border transition-all duration-300 card-shine overflow-hidden relative"
+              style={{
+                background: activeCategory === idx
+                  ? `${cat.color}10`
+                  : 'var(--surface)',
+                borderColor: activeCategory === idx ? `${cat.color}50` : 'var(--border)',
+                boxShadow: activeCategory === idx ? `0 0 20px ${cat.color}20` : 'none',
+                cursor: 'pointer',
+              }}
             >
-              <h3 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-primary"></div>
-                {category.title}
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {category.skills.map((skill, sIdx) => (
-                  <span 
-                    key={sIdx} 
-                    className="px-3 py-1.5 bg-white/5 border border-white/10 rounded-md text-sm text-gray-300 group-hover:border-primary/30 group-hover:text-white transition-colors"
-                  >
-                    {skill}
-                  </span>
+              {/* Top bar */}
+              <div
+                className="absolute top-0 left-0 right-0 h-0.5 rounded-t-2xl"
+                style={{ background: `linear-gradient(90deg, ${cat.color}, transparent)` }}
+              />
+
+              <div className="flex items-center gap-3 mb-6">
+                <div
+                  className="w-10 h-10 rounded-xl flex items-center justify-center text-lg"
+                  style={{ background: `${cat.color}18` }}
+                >
+                  {cat.emoji}
+                </div>
+                <h3 className="font-bold text-sm" style={{ color: 'var(--text-primary)' }}>{cat.title}</h3>
+              </div>
+
+              <div className="space-y-4">
+                {cat.skills.map((skill, sIdx) => (
+                  <div key={sIdx}>
+                    <div className="flex justify-between items-center">
+                      <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>{skill.name}</span>
+                      <span className="text-xs font-semibold" style={{ color: cat.color }}>{skill.level}%</span>
+                    </div>
+                    <AnimatedBar level={skill.level} color={cat.color} />
+                  </div>
                 ))}
               </div>
             </motion.div>
           ))}
         </div>
+
+        {/* Floating skill bubbles */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="mt-16 flex flex-wrap justify-center gap-3"
+        >
+          {['React', 'Python', 'Java', 'SQL', 'Groq', 'LangChain', 'Tailwind', 'Framer', 'WebSockets', 'Git', 'RAG', 'LLMs', 'HTML/CSS', 'System Design'].map((tag, i) => (
+            <motion.span
+              key={tag}
+              whileHover={{ scale: 1.1, y: -2 }}
+              className="px-4 py-2 rounded-full text-sm font-medium border transition-all skill-tag"
+              style={{ animationDelay: `${i * 0.1}s` }}
+            >
+              {tag}
+            </motion.span>
+          ))}
+        </motion.div>
       </div>
     </section>
   );
