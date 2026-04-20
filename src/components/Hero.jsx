@@ -1,6 +1,8 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Mail, Download } from 'lucide-react';
+import { ArrowRight, Mail } from 'lucide-react';
+import { useClickSound } from '../hooks/useSounds';
+import TiltCard from './TiltCard';
 
 const Github = ({ size = 24 }) => (
   <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -17,107 +19,97 @@ const Linkedin = ({ size = 24 }) => (
   </svg>
 );
 
-import { useClickSound } from '../hooks/useSounds';
-import TiltCard from './TiltCard';
+// --- Typewriter Component ---
+const Typewriter = ({ strings, delay = 150, pause = 2000 }) => {
+  const [currentStringIndex, setCurrentStringIndex] = useState(0);
+  const [currentText, setCurrentText] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  useEffect(() => {
+    let timer;
+    const currentFullText = strings[currentStringIndex];
+
+    if (isDeleting) {
+      timer = setTimeout(() => {
+        setCurrentText(currentFullText.substring(0, currentText.length - 1));
+      }, delay / 2);
+    } else {
+      timer = setTimeout(() => {
+        setCurrentText(currentFullText.substring(0, currentText.length + 1));
+      }, delay);
+    }
+
+    if (!isDeleting && currentText === currentFullText) {
+      setTimeout(() => setIsDeleting(true), pause);
+    } else if (isDeleting && currentText === '') {
+      setIsDeleting(false);
+      setCurrentStringIndex((prev) => (prev + 1) % strings.length);
+    }
+
+    return () => clearTimeout(timer);
+  }, [currentText, isDeleting, currentStringIndex, strings, delay, pause]);
+
+  return (
+    <span className="relative">
+      {currentText}
+      <span className="ml-1 w-1 h-10 md:h-14 bg-primary inline-block animate-pulse align-middle" style={{ background: 'var(--primary)', width: '3px' }} />
+    </span>
+  );
+};
 
 export default function Hero() {
   const playClick = useClickSound();
-  const containerRef = useRef(null);
+  const roles = [
+    'GenAI Developer',
+    'AI Engineer',
+    'Full Stack Developer',
+    'Software Engineer',
+    'Problem Solver'
+  ];
 
   return (
-    <section
-      id="home"
-      ref={containerRef}
-      className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden"
-    >
-      {/* Static grid background */}
-      <div
-        className="absolute inset-0 opacity-[0.03] pointer-events-none"
-      >
-        <div
-          className="w-full h-full"
-          style={{
-            backgroundImage: `linear-gradient(var(--text-primary) 1px, transparent 1px), linear-gradient(90deg, var(--text-primary) 1px, transparent 1px)`,
-            backgroundSize: '60px 60px',
-          }}
-        />
+    <section id="home" className="relative min-h-screen flex items-center justify-center pt-24 overflow-hidden">
+      {/* Background elements */}
+      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+        <div className="w-full h-full" style={{
+          backgroundImage: `linear-gradient(var(--text-primary) 1px, transparent 1px), linear-gradient(90deg, var(--text-primary) 1px, transparent 1px)`,
+          backgroundSize: '60px 60px',
+        }} />
       </div>
 
-      {/* Center glow */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <div
-          className="w-[600px] h-[600px] rounded-full blur-[120px] opacity-20"
-          style={{ background: 'radial-gradient(circle, var(--primary) 0%, transparent 70%)' }}
-        />
-      </div>
-
-      <div
-        className="max-w-7xl mx-auto px-6 relative z-10 w-full"
-      >
+      <div className="max-w-7xl mx-auto px-6 relative z-10 w-full">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
-
-          {/* ── Left Column ── */}
+          
+          {/* --- Left Column --- */}
           <div className="text-left">
             <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border backdrop-blur-md mb-8"
-              style={{
-                background: 'rgba(212, 175, 55, 0.1)',
-                borderColor: 'rgba(212, 175, 0, 0.3)',
-              }}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mb-6"
             >
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-xs font-bold tracking-widest uppercase italic" style={{ color: 'var(--primary-light)' }}>
-                Gen AI & Full-Stack Developer
-              </span>
-            </motion.div>
+              <h2 className="text-4xl md:text-5xl font-black mb-2" style={{ color: 'var(--text-primary)', fontFamily: 'Space Grotesk, sans-serif' }}>
+                Hi There,
+              </h2>
+              <h1 className="text-5xl md:text-7xl font-black mb-6" style={{ color: 'var(--text-primary)', fontFamily: 'Space Grotesk, sans-serif' }}>
+                I'm Adithya <span style={{ 
+                  background: 'linear-gradient(135deg, #ffd700, #b8860b)',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent'
+                }}>Harish</span>
+              </h1>
 
-            <motion.p
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="text-xl md:text-2xl font-medium mb-4 flex items-center gap-3"
-              style={{ color: 'var(--text-secondary)' }}
-            >
-              <span className="w-8 h-[2px]" style={{ background: 'var(--primary)' }} />
-              Hi, I'm <span style={{ color: '#ffffff', fontWeight: 800 }}>Adithya Harish</span>
-            </motion.p>
-
-            <motion.h1
-              className="text-6xl md:text-8xl font-black leading-[1.1] mb-8"
-              style={{
-                fontFamily: 'Space Grotesk, sans-serif',
-                color: '#ffffff',
-              }}
-            >
-              {['Building', 'Intelligent', 'Systems.'].map((word, i) => (
-                <span key={i} className="inline-block mr-4 whitespace-nowrap overflow-hidden">
-                  {word.split('').map((char, j) => (
-                    <motion.span
-                      key={j}
-                      initial={{ opacity: 0, y: 30 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{
-                        duration: 0.5,
-                        delay: (i * 0.2) + (j * 0.03),
-                        ease: [0.33, 1, 0.68, 1]
-                      }}
-                      className="inline-block"
-                    >
-                      {char}
-                    </motion.span>
-                  ))}
+              <div className="text-2xl md:text-4xl font-bold min-h-[60px]" style={{ color: 'var(--text-primary)' }}>
+                I Am Into <span style={{ color: 'var(--primary)' }}>
+                  <Typewriter strings={roles} />
                 </span>
-              ))}
-            </motion.h1>
+              </div>
+            </motion.div>
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-lg md:text-xl leading-relaxed mb-10 max-w-lg"
+              transition={{ delay: 0.2 }}
+              className="text-lg md:text-xl leading-relaxed mb-10 max-w-lg mt-8"
               style={{ color: 'var(--text-secondary)' }}
             >
               Crafting <span style={{ color: '#60a5fa' }}>high-performance</span> digital experiences with a focus on 
@@ -125,152 +117,83 @@ export default function Hero() {
               <span style={{ color: '#34d399' }}> AI integration</span>.
             </motion.p>
 
-            {/* Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap gap-5 mb-12"
-            >
+            {/* Icons & Buttons */}
+            <div className="flex flex-wrap gap-5 mb-12">
               <motion.a
                 href="#projects"
                 onClick={playClick}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                className="group flex items-center gap-2 px-7 py-3.5 font-bold rounded-full transition-all"
-                style={{
-                  background: '#ffffff',
-                  color: '#000000',
-                  boxShadow: '0 10px 40px rgba(255, 255, 255, 0.2)',
-                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 font-bold rounded-full transition-all"
+                style={{ background: '#ffffff', color: '#000000', boxShadow: '0 10px 40px rgba(255, 255, 255, 0.2)' }}
               >
-                View Projects
-                <ArrowRight size={18} className="transition-transform group-hover:translate-x-1" />
+                View My Work
               </motion.a>
-
               <motion.a
                 href="#contact"
                 onClick={playClick}
-                whileHover={{ scale: 1.05, y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                className="group flex items-center gap-2 px-7 py-3.5 rounded-full border transition-all"
-                style={{
-                  background: 'var(--surface)',
-                  borderColor: 'var(--border)',
-                  color: 'var(--text-primary)',
-                }}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 py-4 font-bold rounded-full border transition-all"
+                style={{ background: 'var(--surface)', borderColor: 'var(--border)', color: '#ffffff' }}
               >
-                Let's Talk
-                <Mail size={18} />
+                Contact Me
               </motion.a>
-            </motion.div>
+            </div>
 
-            {/* Socials */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="flex items-center gap-6"
-            >
-              {[
-                { href: 'https://github.com/Ah200512', icon: <Github /> },
-                { href: 'https://www.linkedin.com/in/adityaharish05/', icon: <Linkedin /> },
-              ].map((social, i) => (
-                <a
-                  key={i}
-                  href={social.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={playClick}
-                  className="transition-all hover:scale-110"
-                  style={{ color: 'var(--text-muted)' }}
-                >
-                  {social.icon}
-                </a>
-              ))}
+            <div className="flex items-center gap-6">
+              <a href="https://github.com/Ah200512" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                <Github size={28} />
+              </a>
+              <a href="https://www.linkedin.com/in/adityaharish05/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors">
+                <Linkedin size={28} />
+              </a>
               <div className="h-px w-12 bg-white/10" />
-              <button
-                className="text-xs font-bold tracking-[0.2em] uppercase transition-colors hover:text-white"
-                style={{ color: 'var(--text-muted)' }}
-              >
-                Scroll to explore
-              </button>
-            </motion.div>
+              <span className="text-xs font-bold tracking-widest uppercase text-gray-500">Scroll to explore</span>
+            </div>
           </div>
 
-          {/* ── Right Column ── */}
+          {/* --- Right Column (Bento Card) --- */}
           <motion.div
             initial={{ opacity: 0, x: 40 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7, delay: 0.2 }}
-            className="relative hidden lg:block"
+            transition={{ duration: 0.7 }}
+            className="hidden lg:block"
           >
-            {/* Bento-style identity card */}
-            <TiltCard
-              className="p-8 rounded-[2rem] border-2 shadow-2xl overflow-hidden relative"
-              style={{
-                background: 'rgba(15, 15, 15, 0.9)',
-                borderColor: 'var(--border)',
-                maxWidth: '430px',
-                marginLeft: 'auto',
-              }}
-            >
-              {/* Background accent orbs */}
-              <div className="absolute -top-20 -right-20 w-40 h-40 rounded-full blur-[80px] pointer-events-none opacity-40"
-                style={{ background: 'var(--primary)' }}
-              />
-              <div className="absolute -bottom-20 -left-20 w-40 h-40 rounded-full blur-[80px] pointer-events-none opacity-20"
-                style={{ background: 'rgba(139,92,246,0.3)' }}
-              />
-
-              {/* Identity Header */}
-              <div className="flex items-center gap-4 mb-8">
-                <div
-                  className="w-16 h-16 rounded-2xl flex items-center justify-center font-black text-2xl shadow-lg border-2 border-white/10"
-                  style={{
-                    background: 'linear-gradient(135deg, #b8860b, #ffd700)',
-                    color: '#000',
-                    fontFamily: 'Space Grotesk, sans-serif',
-                    boxShadow: '0 0 30px rgba(212, 175, 55, 0.3)'
-                  }}
-                >
+            <TiltCard className="p-8 rounded-[2.5rem] border shadow-2xl relative overflow-hidden" 
+              style={{ background: 'rgba(15,15,15,0.9)', borderColor: 'var(--border)' }}>
+              
+              <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl rounded-full" style={{ background: 'var(--primary)', opacity: 0.2 }} />
+              
+              <div className="flex items-center gap-5 mb-10">
+                <div className="w-16 h-16 rounded-2xl flex items-center justify-center font-black text-2xl"
+                  style={{ background: 'linear-gradient(135deg, #b8860b, #ffd700)', color: '#000' }}>
                   AH
                 </div>
                 <div>
-                  <h3 className="text-xl font-black" style={{ color: 'var(--text-primary)' }}>Adithya Harish</h3>
-                  <p className="text-sm" style={{ color: 'var(--text-muted)' }}>SRM University</p>
+                  <h3 className="text-2xl font-black text-white">Adithya Harish</h3>
+                  <p className="text-sm text-gray-500">GenAI Developer</p>
                 </div>
               </div>
 
-              {/* Quick stats / Chips */}
-              <div className="space-y-4">
+              <div className="space-y-5">
                 {[
-                  { label: 'Frontend Craft', desc: 'React · Tailwind · Framer Motion', icon: '⚛️' },
-                  { label: 'Gen AI Engineering', desc: 'LLMs · RAG · LangChain · Groq', icon: '🤖' },
-                  { label: 'Full-Stack Scope', desc: 'Python · SQL · WebSockets', icon: '🚀' },
+                  { label: 'Core AI', desc: 'LLMs · RAG · LangChain', icon: '🤖' },
+                  { label: 'Full Stack', desc: 'React · Python · SQL', icon: '🚀' },
+                  { label: 'Real-time', desc: 'WebSockets · OpenCV', icon: '⚡' },
                 ].map((item, i) => (
-                  <div
-                    key={i}
-                    className="p-4 rounded-2xl flex items-center gap-4 border transition-all hover:bg-white/5"
-                    style={{ background: 'rgba(255,255,255,0.03)', borderColor: 'var(--border)' }}
-                  >
-                    <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-lg shadow-inner">
-                      {item.icon}
-                    </div>
+                  <div key={i} className="flex items-center gap-4 p-4 rounded-2xl bg-white/5 border border-white/5 transition-colors hover:bg-white/10">
+                    <div className="text-2xl">{item.icon}</div>
                     <div>
-                      <h4 className="text-sm font-bold" style={{ color: 'var(--text-primary)' }}>{item.label}</h4>
-                      <p className="text-xs" style={{ color: 'var(--text-muted)' }}>{item.desc}</p>
+                      <h4 className="text-sm font-bold text-white">{item.label}</h4>
+                      <p className="text-xs text-gray-400">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
 
-              {/* Status */}
-              <div
-                className="mt-6 p-3 rounded-xl flex items-center justify-center"
-                style={{ background: 'rgba(212, 175, 55, 0.08)', border: '1px solid rgba(212, 175, 55, 0.2)' }}
-              >
-                <span className="text-xs font-semibold text-yellow-500 uppercase tracking-widest">🟢 Open to Work</span>
+              <div className="mt-8 p-3 text-center rounded-xl bg-primary/10 border border-primary/20">
+                <span className="text-xs font-bold text-yellow-500 uppercase tracking-widest">Available for hire</span>
               </div>
             </TiltCard>
           </motion.div>
