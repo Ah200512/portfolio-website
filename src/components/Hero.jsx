@@ -81,7 +81,7 @@ export default function Hero() {
               className="text-6xl md:text-8xl font-black leading-[1.1] mb-8"
               style={{
                 fontFamily: 'Space Grotesk, sans-serif',
-                background: 'linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%)',
+                background: 'linear-gradient(135deg, #ffd700 0%, #b8860b 100%)',
                 WebkitBackgroundClip: 'text',
                 WebkitTextFillColor: 'transparent',
                 backgroundClip: 'text',
