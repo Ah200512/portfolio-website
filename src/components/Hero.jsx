@@ -87,10 +87,10 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               className="mb-6"
             >
-              <h2 className="text-4xl md:text-5xl font-black mb-2" style={{ color: 'var(--text-primary)', fontFamily: 'Space Grotesk, sans-serif' }}>
+              <h2 className="text-2xl md:text-3xl font-black mb-2" style={{ color: 'var(--text-primary)', fontFamily: 'Space Grotesk, sans-serif' }}>
                 Hi There,
               </h2>
-              <h1 className="text-5xl md:text-7xl font-black mb-6" style={{ color: 'var(--text-primary)', fontFamily: 'Space Grotesk, sans-serif' }}>
+              <h1 className="text-4xl md:text-6xl font-black mb-6" style={{ color: 'var(--text-primary)', fontFamily: 'Space Grotesk, sans-serif' }}>
                 I'm Adithya <span style={{ 
                   background: 'linear-gradient(135deg, #ffd700, #b8860b)',
                   WebkitBackgroundClip: 'text',
@@ -98,7 +98,7 @@ export default function Hero() {
                 }}>Harish</span>
               </h1>
 
-              <div className="text-2xl md:text-4xl font-bold min-h-[60px]" style={{ color: 'var(--text-primary)' }}>
+              <div className="text-xl md:text-3xl font-bold min-h-[50px]" style={{ color: 'var(--text-primary)' }}>
                 I Am Into <span style={{ color: 'var(--primary)' }}>
                   <Typewriter strings={roles} />
                 </span>
@@ -193,7 +193,7 @@ export default function Hero() {
               </div>
 
               <div className="mt-8 p-3 text-center rounded-xl bg-primary/10 border border-primary/20">
-                <span className="text-xs font-bold text-yellow-500 uppercase tracking-widest">Available for hire</span>
+                <span className="text-xs font-bold text-yellow-500 uppercase tracking-widest">Open to Work</span>
               </div>
             </TiltCard>
           </motion.div>
