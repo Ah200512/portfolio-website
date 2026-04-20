@@ -147,9 +147,8 @@ export default function Hero() {
               </a>
               <a href="https://www.linkedin.com/in/adityaharish05/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors">
                 <Linkedin size={28} />
-              </a>
               <div className="h-px w-12 bg-white/10" />
-              <div className="mouse-scroll" />
+            </div>
             </div>
           </div>
 
@@ -198,6 +197,16 @@ export default function Hero() {
             </TiltCard>
           </motion.div>
         </div>
+
+        {/* --- Centered Mouse Scroll --- */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 1 }}
+          className="absolute bottom-10 left-1/2 -translate-x-1/2 hidden md:block"
+        >
+          <div className="mouse-scroll" />
+        </motion.div>
       </div>
     </section>
   );
