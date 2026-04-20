@@ -142,13 +142,13 @@ export default function Hero() {
             </div>
 
             <div className="flex items-center gap-6">
-              <a href="https://github.com/Ah200512" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://github.com/Ah200512" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={playClick}>
                 <Github size={28} />
               </a>
-              <a href="https://www.linkedin.com/in/adityaharish05/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors">
+              <a href="https://www.linkedin.com/in/adityaharish05/" target="_blank" rel="noreferrer" className="text-gray-400 hover:text-white transition-colors" onClick={playClick}>
                 <Linkedin size={28} />
+              </a>
               <div className="h-px w-12 bg-white/10" />
-            </div>
             </div>
           </div>
 
@@ -171,7 +171,7 @@ export default function Hero() {
                 </div>
                 <div>
                   <h3 className="text-2xl font-black text-white">Adithya Harish</h3>
-                  <p className="text-sm text-gray-500">GenAI Developer</p>
+                  <p className="text-sm text-gray-500">SRM University</p>
                 </div>
               </div>
 
