@@ -79,9 +79,15 @@ export default function Hero() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="text-6xl md:text-8xl font-black leading-[1.1] mb-8"
-              style={{ fontFamily: 'Space Grotesk, sans-serif', color: 'var(--text-primary)' }}
+              style={{
+                fontFamily: 'Space Grotesk, sans-serif',
+                background: 'linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                backgroundClip: 'text',
+              }}
             >
-              Building <span style={{ color: 'var(--primary)' }}>Intelligent</span> Systems.
+              Building <span style={{ stroke: 'white', WebkitTextStroke: '0px' }}>Intelligent</span> Systems.
             </motion.h1>
 
             <motion.p
@@ -91,8 +97,9 @@ export default function Hero() {
               className="text-lg md:text-xl leading-relaxed mb-10 max-w-lg"
               style={{ color: 'var(--text-secondary)' }}
             >
-              Crafting high-performance digital experiences with a focus on 
-              scalable architecture and seamless AI integration.
+              Crafting <span style={{ color: '#60a5fa' }}>high-performance</span> digital experiences with a focus on 
+              <span style={{ color: '#a78bfa' }}> scalable architecture</span> and seamless 
+              <span style={{ color: '#34d399' }}> AI integration</span>.
             </motion.p>
 
             {/* Buttons */}

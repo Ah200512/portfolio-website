@@ -55,18 +55,18 @@ export default function About() {
             {[
               <>
                 I'm driven by deep curiosity and relentless ambition. As a developer at the intersection of{' '}
-                <strong style={{ color: 'var(--text-primary)' }}>user-centric design</strong> and{' '}
-                <strong style={{ color: 'var(--text-primary)' }}>Generative AI</strong>, I create products that feel
+                <strong style={{ color: '#60a5fa' }}>user-centric design</strong> and{' '}
+                <strong style={{ color: '#34d399' }}>Generative AI</strong>, I create products that feel
                 intuitive, seamless, and intelligent.
               </>,
               <>
                 My approach isn't just about writing code — it's about solving{' '}
-                <strong style={{ color: 'var(--text-primary)' }}>real problems</strong>. From low-latency WebSockets to
+                <strong style={{ color: '#f59e0b' }}>real problems</strong>. From low-latency WebSockets to
                 complex LLM pipelines, I focus on the entire lifecycle from day one.
               </>,
               <>
                 I thrive where engineering meets product vision — where ambitious ideas transform into{' '}
-                <strong style={{ color: 'var(--text-primary)' }}>immersive, impactful digital experiences</strong>.
+                <strong style={{ color: '#a78bfa' }}>immersive, impactful digital experiences</strong>.
               </>,
             ].map((text, i) => (
               <motion.p key={i} variants={itemFade} className="text-lg leading-relaxed" style={{ color: 'var(--text-secondary)' }}>
