@@ -97,6 +97,7 @@ export default function Navbar() {
 
           <motion.a
             href="/resume_adithya_harish.pdf"
+            download="Adithya_Harish_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
             onClick={playClick}
@@ -149,6 +150,7 @@ export default function Navbar() {
               ))}
               <a
                 href="/resume_adithya_harish.pdf"
+                download="Adithya_Harish_Resume.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 onClick={() => { setIsMobileMenuOpen(false); playClick(); }}
